@@ -1,3 +1,7 @@
 /dataset
 /data/images
 /data/labels
+/tfrecords
+/data
+/models/*/output
+/models/*/pretrained_*
