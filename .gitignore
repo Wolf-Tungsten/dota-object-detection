@@ -9,6 +9,4 @@ node_modules
 /resources
 /data
 htxt-inference-app/src/main/*
-
-
 htxt-inference-app/target/*
