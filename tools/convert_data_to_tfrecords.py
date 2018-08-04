@@ -42,9 +42,9 @@ from object_detection.utils import dataset_util
 from object_detection.utils import label_map_util
 
 flags = tf.app.flags
-flags.DEFINE_string('data_dir', '', 'Root directory to raw pet dataset.')
-flags.DEFINE_string('output_dir', '', 'Path to directory to output TFRecords.')
-flags.DEFINE_string('label_map_path', 'data/pet_label_map.pbtxt',
+flags.DEFINE_string('data_dir', r'.\dataset\well_prepared_data', 'Root directory to raw pet dataset.')
+flags.DEFINE_string('output_dir', r'.\data', 'Path to directory to output TFRecords.')
+flags.DEFINE_string('label_map_path', r'data\label_map.pbtxt',
                     'Path to label map proto')
 flags.DEFINE_boolean('faces_only', True, 'If True, generates bounding boxes '
 
@@ -71,12 +71,9 @@ def get_class_name_from_filename(file_name):
 
 
 def dict_to_tf_example(data,
-                       mask_path,
                        label_map_dict,
-                       image_subdirectory,
-                       ignore_difficult_instances=False,
-                       faces_only=True,
-                       mask_type='png'):
+                       image_subdirectory
+                       ):
   """Convert XML derived dict to tf.Example proto.
   Notice that this function normalizes the bounding box coordinates provided
   by the raw data.
@@ -107,19 +104,6 @@ def dict_to_tf_example(data,
     raise ValueError('Image format not JPEG')
   key = hashlib.sha256(encoded_jpg).hexdigest()
 
-  with tf.gfile.GFile(mask_path, 'rb') as fid:
-    encoded_mask_png = fid.read()
-  encoded_png_io = io.BytesIO(encoded_mask_png)
-  mask = PIL.Image.open(encoded_png_io)
-  if mask.format != 'PNG':
-    raise ValueError('Mask format not PNG')
-
-  mask_np = np.asarray(mask)
-  nonbackground_indices_x = np.any(mask_np != 2, axis=0)
-  nonbackground_indices_y = np.any(mask_np != 2, axis=1)
-  nonzero_x_indices = np.where(nonbackground_indices_x)
-  nonzero_y_indices = np.where(nonbackground_indices_y)
-
   width = int(data['size']['width'])
   height = int(data['size']['height'])
 
@@ -129,40 +113,21 @@ def dict_to_tf_example(data,
   ymaxs = []
   classes = []
   classes_text = []
-  truncated = []
-  poses = []
-  difficult_obj = []
-  masks = []
+
   if 'object' in data:
     for obj in data['object']:
-      difficult = bool(int(obj['difficult']))
-      if ignore_difficult_instances and difficult:
-        continue
-      difficult_obj.append(int(difficult))
+        xmin = float(obj['bbox']['xmin'])
+        xmax = float(obj['bbox']['xmax'])
+        ymin = float(obj['bbox']['ymin'])
+        ymax = float(obj['bbox']['ymax'])
 
-      if faces_only:
-        xmin = float(obj['bndbox']['xmin'])
-        xmax = float(obj['bndbox']['xmax'])
-        ymin = float(obj['bndbox']['ymin'])
-        ymax = float(obj['bndbox']['ymax'])
-      else:
-        xmin = float(np.min(nonzero_x_indices))
-        xmax = float(np.max(nonzero_x_indices))
-        ymin = float(np.min(nonzero_y_indices))
-        ymax = float(np.max(nonzero_y_indices))
-
-      xmins.append(xmin / width)
-      ymins.append(ymin / height)
-      xmaxs.append(xmax / width)
-      ymaxs.append(ymax / height)
-      class_name = get_class_name_from_filename(data['filename'])
-      classes_text.append(class_name.encode('utf8'))
-      classes.append(label_map_dict[class_name])
-      truncated.append(int(obj['truncated']))
-      poses.append(obj['pose'].encode('utf8'))
-      if not faces_only:
-        mask_remapped = (mask_np != 2).astype(np.uint8)
-        masks.append(mask_remapped)
+        xmins.append(xmin / width)
+        ymins.append(ymin / height)
+        xmaxs.append(xmax / width)
+        ymaxs.append(ymax / height)
+        class_name = obj['class_name']
+        classes_text.append(class_name.encode('utf8'))
+        classes.append(label_map_dict[class_name])
 
   feature_dict = {
       'image/height': dataset_util.int64_feature(height),
@@ -179,26 +144,8 @@ def dict_to_tf_example(data,
       'image/object/bbox/ymin': dataset_util.float_list_feature(ymins),
       'image/object/bbox/ymax': dataset_util.float_list_feature(ymaxs),
       'image/object/class/text': dataset_util.bytes_list_feature(classes_text),
-      'image/object/class/label': dataset_util.int64_list_feature(classes),
-      'image/object/difficult': dataset_util.int64_list_feature(difficult_obj),
-      'image/object/truncated': dataset_util.int64_list_feature(truncated),
-      'image/object/view': dataset_util.bytes_list_feature(poses),
+      'image/object/class/label': dataset_util.int64_list_feature(classes)
   }
-  if not faces_only:
-    if mask_type == 'numerical':
-      mask_stack = np.stack(masks).astype(np.float32)
-      masks_flattened = np.reshape(mask_stack, [-1])
-      feature_dict['image/object/mask'] = (
-          dataset_util.float_list_feature(masks_flattened.tolist()))
-    elif mask_type == 'png':
-      encoded_mask_png_list = []
-      for mask in masks:
-        img = PIL.Image.fromarray(mask)
-        output = io.BytesIO()
-        img.save(output, format='PNG')
-        encoded_mask_png_list.append(output.getvalue())
-      feature_dict['image/object/mask'] = (
-          dataset_util.bytes_list_feature(encoded_mask_png_list))
 
   example = tf.train.Example(features=tf.train.Features(feature=feature_dict))
   return example
@@ -209,9 +156,8 @@ def create_tf_record(output_filename,
                      label_map_dict,
                      annotations_dir,
                      image_dir,
-                     examples, # 传入的是一个名称列表
-                     faces_only=True,
-                     mask_type='png'):
+                     examples # 传入的是一个名称列表
+                     ):
   """Creates a TFRecord file from examples.
   Args:
     output_filename: Path to where output file is saved.
@@ -220,10 +166,6 @@ def create_tf_record(output_filename,
     annotations_dir: Directory where annotation files are stored.
     image_dir: Directory where image files are stored.
     examples: Examples to parse and save to tf record.
-    faces_only: If True, generates bounding boxes for pet faces.  Otherwise
-      generates bounding boxes (as well as segmentations for full pet bodies).
-    mask_type: 'numerical' or 'png'. 'png' is recommended because it leads to
-      smaller file sizes.
   """
   with contextlib2.ExitStack() as tf_record_close_stack:
     output_tfrecords = tf_record_creation_util.open_sharded_output_tfrecords(
@@ -233,80 +175,94 @@ def create_tf_record(output_filename,
     for idx, example in enumerate(examples):
       if idx % 100 == 0:
         logging.info('On image %d of %d', idx, len(examples))
-      xml_path = os.path.join(annotations_dir, 'xmls', example + '.xml')
-      mask_path = os.path.join(annotations_dir, 'trimaps', example + '.png')
+      label_path = os.path.join(annotations_dir, example + '.txt')
 
-      if not os.path.exists(xml_path):
-        logging.warning('Could not find %s, ignoring example.', xml_path)
+      if not os.path.exists(label_path):
+        logging.warning('Could not find %s, ignoring example.', label_path)
         continue
-      with tf.gfile.GFile(xml_path, 'r') as fid:
-        xml_str = fid.read()
-      xml = etree.fromstring(xml_str)
-      data = dataset_util.recursive_parse_xml_to_dict(xml)['annotation']
+      with tf.gfile.GFile(label_path, 'r') as fid:
+        labels = fid.readlines()
+
+      data = {
+        'filename': example + '.jpg',
+        'size':{
+          'width': 500,
+          'height': 500
+        },
+        'object':[]
+      }
+
+      for label in labels:
+        label = label.split(' ')
+        obj = {
+          'class_name': label[0].lower(),
+          'bbox': {
+            'xmin': int(label[1]),
+            'ymin': int(label[2]),
+            'xmax': int(label[3]),
+            'ymax': int(label[4])
+          }
+        }
+        if obj['bbox']['xmin'] < obj['bbox']['xmax'] and obj['bbox']['ymin'] < obj['bbox']['ymax'] and max(int(label[1]),int(label[2]),int(label[3]),int(label[4])) <= 500:
+            data['object'].append(obj)
+        else:
+          print('害群之马'+example)
+
 
       try:
         tf_example = dict_to_tf_example(
             data,
-            mask_path,
             label_map_dict,
             image_dir,
-            faces_only=faces_only,
-            mask_type=mask_type)
+            )
         if tf_example:
           shard_idx = idx % num_shards
           output_tfrecords[shard_idx].write(tf_example.SerializeToString())
       except ValueError:
-        logging.warning('Invalid example: %s, ignoring.', xml_path)
+        logging.warning('Invalid example: %s, ignoring.', label_path)
 
 
-# TODO(derekjchow): Add test for pet/PASCAL main files.
 def main(_):
   data_dir = FLAGS.data_dir
   label_map_dict = label_map_util.get_label_map_dict(FLAGS.label_map_path)
-  # label_map 是 一个将每个种类名称映射到指定数字的文件
-
-  logging.info('Reading from Pet dataset.')
+  
+  logging.info('Reading from DOTA & HTXT dataset.')
   image_dir = os.path.join(data_dir, 'images')
-  annotations_dir = os.path.join(data_dir, 'annotations')
-  examples_path = os.path.join(annotations_dir, 'trainval.txt')
-  examples_list = dataset_util.read_examples_list(examples_path)
+  annotations_dir = os.path.join(data_dir, 'labels')
 
-  # Test images are not included in the downloaded data set, so we shall perform
-  # our own split.
-  random.seed(42)
-  random.shuffle(examples_list) # 打乱顺序
-  num_examples = len(examples_list)
-  num_train = int(0.7 * num_examples)
-  train_examples = examples_list[:num_train] # 取前0.7作为训练集
-  val_examples = examples_list[num_train:] # 取后0.3作为验证集
-  logging.info('%d training and %d validation examples.',
-               len(train_examples), len(val_examples))
+  examples_path = os.path.join(annotations_dir, 'list.txt')
+  with open(examples_path, 'r') as list_file:
+    files = list_file.readlines()
+    examples_list = [ filename.strip() for filename in files ]
 
-  train_output_path = os.path.join(FLAGS.output_dir, 'pet_faces_train.record')
-  val_output_path = os.path.join(FLAGS.output_dir, 'pet_faces_val.record')
-  if not FLAGS.faces_only:
-    train_output_path = os.path.join(FLAGS.output_dir,
-                                     'pets_fullbody_with_masks_train.record')
-    val_output_path = os.path.join(FLAGS.output_dir,
-                                   'pets_fullbody_with_masks_val.record')
-  create_tf_record(
-      train_output_path,
-      FLAGS.num_shards,
-      label_map_dict,
-      annotations_dir,
-      image_dir,
-      train_examples,
-      faces_only=FLAGS.faces_only,
-      mask_type=FLAGS.mask_type)
-  create_tf_record(
-      val_output_path,
-      FLAGS.num_shards,
-      label_map_dict,
-      annotations_dir,
-      image_dir,
-      val_examples,
-      faces_only=FLAGS.faces_only,
-      mask_type=FLAGS.mask_type)
+    random.seed(42)
+    random.shuffle(examples_list) # 打乱顺序
+    num_examples = len(examples_list)
+    num_train = int(0.7 * num_examples)
+    train_examples = examples_list[:num_train] # 取前0.7作为训练集
+    val_examples = examples_list[num_train:] # 取后0.3作为验证集
+    logging.info('%d training and %d validation examples.',
+                len(train_examples), len(val_examples))
+
+    train_output_path = os.path.join(FLAGS.output_dir, 'htxt_dota_train.record')
+    val_output_path = os.path.join(FLAGS.output_dir, 'htxt_dota_val.record')
+
+    create_tf_record(
+        train_output_path,
+        FLAGS.num_shards,
+        label_map_dict,
+        annotations_dir,
+        image_dir,
+        train_examples
+    )
+    create_tf_record(
+        val_output_path,
+        FLAGS.num_shards,
+        label_map_dict,
+        annotations_dir,
+        image_dir,
+        val_examples
+        )
 
 
 if __name__ == '__main__':
