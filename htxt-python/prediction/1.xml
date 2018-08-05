@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Research Direction="高分软件大赛" ImageName="1.tif">
+  <Department>参赛单位</Department>
+  <Date>2017-5-18</Date>
+  <PluginName>目标识别</PluginName>
+  <PluginClass>检测</PluginClass>
+  <Results Coordinate="Pixel">
+    <Object>helicopter</Object>
+    <Pixel Coordinate="X and Y">
+     <!-- 左下，右下，右上，左上 -->
+      <Pt index="1" LeftTopX="310" LeftTopY="400.1833" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="401.4984" LeftTopY="400.1833" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="401.4984" LeftTopY="345.1891" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="310" LeftTopY="345.1891" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>helicopter</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="304.0666" LeftTopY="418.1087" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="350.0761" LeftTopY="418.1087" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="350.0761" LeftTopY="365.3769" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="304.0666" LeftTopY="365.3769" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>helicopter</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="252.6443" LeftTopY="445.2577" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="298.6537" LeftTopY="445.2577" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="298.6537" LeftTopY="382.9542" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="252.6443" LeftTopY="382.9542" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="877.8317" LeftTopY="1379.637" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="913.0154" LeftTopY="1379.637" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="913.0154" LeftTopY="1339.435" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="877.8317" LeftTopY="1339.435" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="940.0798" LeftTopY="1357.361" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="967.1442" LeftTopY="1357.361" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="967.1442" LeftTopY="1320.466" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="940.0798" LeftTopY="1320.466" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1013.154" LeftTopY="1326.035" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1042.924" LeftTopY="1326.035" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1042.924" LeftTopY="1284.789" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1013.154" LeftTopY="1284.789" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1078.108" LeftTopY="1303.759" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1110.585" LeftTopY="1303.759" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1110.585" LeftTopY="1264.776" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1078.108" LeftTopY="1264.776" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1110.585" LeftTopY="1278.176" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1137.65" LeftTopY="1278.176" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1137.65" LeftTopY="1239.019" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1110.585" LeftTopY="1239.019" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1189.072" LeftTopY="1251.375" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1218.843" LeftTopY="1251.375" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1218.843" LeftTopY="1220.223" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1189.072" LeftTopY="1220.223" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1237.788" LeftTopY="1231.361" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1264.853" LeftTopY="1231.361" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1264.853" LeftTopY="1191.16" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1237.788" LeftTopY="1191.16" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1305.449" LeftTopY="1181.066" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1343.339" LeftTopY="1181.066" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1343.339" LeftTopY="1154.265" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1305.449" LeftTopY="1154.265" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1354.165" LeftTopY="1172.19" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1381.229" LeftTopY="1172.19" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1381.229" LeftTopY="1135.47" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1354.165" LeftTopY="1135.47" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1643.754" LeftTopY="1049.498" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1676.231" LeftTopY="1049.498" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1676.231" LeftTopY="1007.208" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1643.754" LeftTopY="1007.208" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1795.315" LeftTopY="980.4069" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1833.205" LeftTopY="980.4069" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1833.205" LeftTopY="937.943" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1795.315" LeftTopY="937.943" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1906.279" LeftTopY="933.5922" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1938.756" LeftTopY="933.5922" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1938.756" LeftTopY="897.9156" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1906.279" LeftTopY="897.9156" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1164.714" LeftTopY="1487.015" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1202.604" LeftTopY="1487.015" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1202.604" LeftTopY="1450.294" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1164.714" LeftTopY="1450.294" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1784.489" LeftTopY="1104.84" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1825.085" LeftTopY="1104.84" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1825.085" LeftTopY="1071.078" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1784.489" LeftTopY="1071.078" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1890.04" LeftTopY="1186.113" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1927.93" LeftTopY="1186.113" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1927.93" LeftTopY="1143.649" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1890.04" LeftTopY="1143.649" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1827.792" LeftTopY="1192.378" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1865.682" LeftTopY="1192.378" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1865.682" LeftTopY="1151.133" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1827.792" LeftTopY="1151.133" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1773.663" LeftTopY="1233.624" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1814.26" LeftTopY="1233.624" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1814.26" LeftTopY="1189.768" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1773.663" LeftTopY="1189.768" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1727.654" LeftTopY="1258.51" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1765.544" LeftTopY="1258.51" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1765.544" LeftTopY="1209.781" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1727.654" LeftTopY="1209.781" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="812.8772" LeftTopY="1658.611" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="850.7673" LeftTopY="1658.611" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="850.7673" LeftTopY="1611.1" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="812.8772" LeftTopY="1611.1" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="967.1442" LeftTopY="1583.603" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="994.2086" LeftTopY="1583.603" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="994.2086" LeftTopY="1541.139" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="967.1442" LeftTopY="1541.139" RightBottomX="" RightBottomY="" />
+    </Pixel>
+    <Object>plane</Object>
+    <Pixel Coordinate="X and Y">
+      <Pt index="1" LeftTopX="1059.163" LeftTopY="1576.119" RightBottomX="" RightBottomY="" />
+      <Pt index="2" LeftTopX="1094.347" LeftTopY="1576.119" RightBottomX="" RightBottomY="" />
+      <Pt index="3" LeftTopX="1094.347" LeftTopY="1538.702" RightBottomX="" RightBottomY="" />
+      <Pt index="4" LeftTopX="1059.163" LeftTopY="1538.702" RightBottomX="" RightBottomY="" />
+    </Pixel>
+  </Results>
+</Research>

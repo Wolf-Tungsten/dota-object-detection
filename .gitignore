@@ -13,3 +13,6 @@ htxt-inference-app/target/*
 htxt-inference-app/.settings/*
 htxt-inference-app/.project
 htxt-inference-app/.classpath
+htxt-python/.idea
+htxt-python/object_detection/exported_model/*
+.idea
