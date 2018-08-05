@@ -8,5 +8,8 @@
 node_modules
 /resources
 /data
-htxt-inference-app/src/main/*
+htxt-inference-app/src/main/resources/*
 htxt-inference-app/target/*
+htxt-inference-app/.settings/*
+htxt-inference-app/.project
+htxt-inference-app/.classpath
