@@ -55,8 +55,8 @@ def read_xml(p):
     return xml_list
 
 # TODO: 这个函数可用于模型最终的xml文件输出
-def write_xml(self, direction, ETitem):
-    ETitem.write(direction, encoding='utf-8')
+def write_xml(direction, ETree):
+    ETree.write(direction, encoding='UTF-8')
 
 def read_image(direction, method='opencv', padding=None):
     '''
